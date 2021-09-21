@@ -1,0 +1,10 @@
+library(readr)
+dataset <- read_delim(file="./household_power_consumption.txt", ";", escape_double = FALSE, 
+                      trim_ws = TRUE)
+class(dataset$Date)
+dataset$Date <- as.Date(dataset$Date, format = "%d/%m/%Y")
+class(dataset$Date)
+dataset <- subset(dataset, dataset$Date>="2007-02-01"&dataset$Date<="2007-02-02")
+hist(dataset$Global_active_power, col="red", xlab = "Global Active Power(kilowatts)",main = "Global Active Power")
+dev.copy(png, "Plot1.png", width=480, height=480)
+dev.off()
